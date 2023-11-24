@@ -1,0 +1,19 @@
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.container__search-buttons{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.container__form-control{
+  max-width: 400px;
+}
+
+.container__filtered-items{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

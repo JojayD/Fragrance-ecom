@@ -1,0 +1,21 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+	filter: invert(1);
+}
+
+.carousel-indicators {
+	filter: invert(0.5);
+}
+
+.container__carousel {
+	height: 400px;
+	width: 400px;
+  overflow: hidden;
+	margin: 5rem auto;
+}
+
+
+.custom-carousel .carousel-item img {
+  object-fit: cover;
+	max-height: 40vh;
+}
