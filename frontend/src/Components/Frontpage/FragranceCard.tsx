@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import styles from "../Styles/Fragrance.module.css";
+import styles from "/frontend/src/Styles/Fragrance.module.css";
 interface Fragrance {
 	Name: string;
 	Brand: string;
 	Description: string;
 	Notes: string;
-	ImageUrl: string;
+	ImageURL: string;
 }
 
 type Props = { data: Fragrance };
-interface MyButtonProps{
-	title: String,
-	func: () => void
+interface MyButtonProps {
+	title: String;
+	func: () => void;
 }
 
 function MyButton({ title, func }: MyButtonProps) {
@@ -20,12 +20,15 @@ function MyButton({ title, func }: MyButtonProps) {
 }
 
 export default function Fragrance({ data }: Props) {
-	const longDescription = data.Description
+	const longDescription = data.Description;
 	const [viewStatus, setViewStatus] = useState<Boolean>(false);
-	const [description, setDescription] = useState<String>(data.Description.slice(0,50));
-	console.log(data.Description.length);
-
-	
+	const [description, setDescription] = useState<String>(
+		data.Description.slice(0, 50)
+	);
+	useEffect(() => {
+		console.log(data);
+		
+	}, []);
 
 	function viewMoreHandler() {
 		if (data.Description.length > 200 && viewStatus === false) {
@@ -40,11 +43,14 @@ export default function Fragrance({ data }: Props) {
 	return (
 		<>
 			<div className={styles.container__fragrance}>
-				<img src ={data.ImageUrl}/>
+				{data.ImageURL !== ""&& <img src={data.ImageURL} />}
 				<p>Fragrance Name: {data.Name}</p>
 				<p>{data.Brand}</p>
 				<p>{description}</p>
-				<MyButton title={`View More`} func={viewMoreHandler}/>
+				<MyButton
+					title={`View More`}
+					func={viewMoreHandler}
+				/>
 			</div>
 		</>
 	);

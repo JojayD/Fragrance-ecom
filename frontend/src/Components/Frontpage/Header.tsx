@@ -1,28 +1,33 @@
 import styles from "/frontend/src/Styles/Header.module.css";
 import { Link } from "react-router-dom";
 import Cart from "/frontend/src/assets/cart-shopping-solid.svg";
+import { useNavigate } from "react-router-dom";
 import fragance_panel from "/frontend/src/assets/frag_panel.svg";
 import { Form, Dropdown } from "react-bootstrap";
 import { useUserContext } from "../../../context/UserProvider";
 type Props = {};
 
 export default function Header({}: Props) {
+	const navigate = useNavigate();
 	const { headerSearchBar, setHeaderSearchBar } = useUserContext();
 	function handleKeyDownEvent(event: any) {
 		if (event.key == "Enter") {
-			console.log("Enter was clicked");			
+			console.log(`${headerSearchBar}`);
+			const encodedQuery = encodeURIComponent(headerSearchBar);
+			console.log(encodedQuery);
+			// navigate(`/search-results?query=${encodedQuery}`); 
+			navigate(`/Search`)
 		}
 	}
 
-	function changeHandler(event:any){
-		const val = event.target.value
-		setHeaderSearchBar(val)
+	function changeHandler(event: any) {
+		const val = event.target.value;
+		setHeaderSearchBar(val);
 	}
 
 	return (
 		<div className={styles.container}>
 			<p>Joda Fragrance</p>
-
 			<header className={styles["container__header"]}>
 				<li className={styles["container__header-li"]}>
 					<Link

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FragranceCard from "../FragranceCard";
+import FragranceCard from "../Frontpage/FragranceCard";
 import { Button, FormControl, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "/frontend/src/Styles/Search.module.css";
@@ -13,7 +13,7 @@ interface Fragrance {
 	Brand: string;
 	Description: string;
 	Notes: string;
-	ImageUrl: string;
+	ImageURL: string;
 }
 
 function MyButton({ title, func }: MyButtonProps) {
@@ -22,18 +22,31 @@ function MyButton({ title, func }: MyButtonProps) {
 
 interface SearchProps {
 	listOfFragrances: Fragrance[];
+	headerSearchBar?: string | undefined;
 }
 
-const Search: React.FC<SearchProps> = ({ listOfFragrances }) => {
+const Search: React.FC<SearchProps> = ({
+	listOfFragrances,
+	headerSearchBar,
+}) => {
 	const [filterNameButton, setFilterNameButton] = useState<string>("Filter");
 	const [fragranceQuery, setFragranceQuery] = useState<string>("");
 	const [filteredItems, setFilteredItems] = useState<Fragrance[]>([]);
 
+	function checkHomeSearched() {
+		if (headerSearchBar) {
+			setFragranceQuery(headerSearchBar);
+		} else {
+			setFragranceQuery(""); // Set a default value if headerSearchBar is undefined
+		}
+	}
 	useEffect(() => {}, [filterNameButton]);
-	// useEffect(() => {
-	// 	console.log(filteredItems);
 
-	// }, [filteredItems]);
+	useEffect(() => {
+		if (headerSearchBar) {
+			setFragranceQuery(headerSearchBar);
+		}
+	}, [headerSearchBar]);
 
 	function handleInput(event: any) {
 		const input = event.target.value;
@@ -96,37 +109,43 @@ const Search: React.FC<SearchProps> = ({ listOfFragrances }) => {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles["container__search-buttons"]}>
-				<Link to={"/"}>
-					<MyButton title='Back' />
-				</Link>
-
-				<Dropdown onSelect={handleDropDownSelect}>
-					<Dropdown.Toggle
-						variant='primary'
-						id='dropdown-basic'
-					>
-						{filterNameButton}
-					</Dropdown.Toggle>
-					<Dropdown.Menu>
-						<Dropdown.Item eventKey='Brand'>Brand</Dropdown.Item>
-						<Dropdown.Item eventKey='Name'>Name</Dropdown.Item>
-						<Dropdown.Item eventKey='Notes'>Notes</Dropdown.Item>
-					</Dropdown.Menu>
-				</Dropdown>
-
-				<MyButton
-					title='Search'
-					func={filteringSearch}
-				/>
-			</div>
 			<div className={styles["container__form-control"]}>
 				<FormControl
-					size='sm'
 					type='text'
 					value={fragranceQuery}
 					onChange={handleInput}
 				/>
+			</div>
+			<div className={styles["container__search-buttons"]}>
+				<div className={styles["container__search-buttons-item"]}>
+					<Link to={"/"}>
+						<MyButton title='Back' />
+					</Link>
+				</div>
+
+				<div className={styles["container__search-buttons-item"]}>
+					<Dropdown onSelect={handleDropDownSelect}>
+						<Dropdown.Toggle
+							variant='primary'
+							id='dropdown-basic'
+						>
+							{filterNameButton}
+						</Dropdown.Toggle>
+						<Dropdown.Menu>
+							<Dropdown.Item eventKey='Brand'>Brand</Dropdown.Item>
+
+							<Dropdown.Item eventKey='Name'>Name</Dropdown.Item>
+
+							<Dropdown.Item eventKey='Notes'>Notes</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
+				</div>
+				<div className={styles["container__search-buttons-item"]}>
+					<MyButton
+						title='Search'
+						func={filteringSearch}
+					/>
+				</div>
 			</div>
 			<div className={styles["container__filtered-items"]}>
 				{renderFragrances()}

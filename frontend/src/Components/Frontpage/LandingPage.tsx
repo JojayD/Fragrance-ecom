@@ -16,7 +16,7 @@ export default function LandingPage({}: Props) {
 
 		return (
 			<>
-				<Header/>
+				<Header />
 				<div className='container__carousel'>
 					<Carousel
 						activeIndex={index}
@@ -24,28 +24,36 @@ export default function LandingPage({}: Props) {
 						className='custom-carousel'
 					>
 						<Carousel.Item>
-							<img
-								src='https://static.luckyscent.com/images/products/51145.jpg?width=400&404=product.png'
-								alt={`Alexandria II by Xerjoff`}
-							/>
+							<div className='carousel-item-wrapper'>
+								<img
+									src='https://static.luckyscent.com/images/products/51145.jpg?width=400&404=product.png'
+									alt={`Alexandria II by Xerjoff`}
+								/>
+							</div>
 						</Carousel.Item>
 						<Carousel.Item>
-							<img
-								src='https://static.luckyscent.com/images/products/70021.jpg?width=400&404=product.png'
-								alt={`Exit the King By Etat Libre d Orange`}
-							/>
+							<div className='carousel-item-wrapper'>
+								<img
+									src='https://static.luckyscent.com/images/products/70021.jpg?width=400&404=product.png'
+									alt={`Exit the King By Etat Libre d Orange`}
+								/>
+							</div>
 						</Carousel.Item>
 						<Carousel.Item>
-							<img
-								src='https://static.luckyscent.com/images/products/477053.jpg?width=400&404=product.png'
-								alt={`Layton By Parfums De Marley`}
-							/>
+							<div className='carousel-item-wrapper'>
+								<img
+									src='https://static.luckyscent.com/images/products/477053.jpg?width=400&404=product.png'
+									alt={`Layton By Parfums De Marley`}
+								/>
+							</div>
 						</Carousel.Item>
 						<Carousel.Item>
-							<img
-								src='https://static.luckyscent.com/images/products/702055.jpg?width=400&404=product.png'
-								alt={`Vanille De Tahiti By Perris`}
-							/>
+							<div className='carousel-item-wrapper'>
+								<img
+									src='https://static.luckyscent.com/images/products/702055.jpg?width=400&404=product.png'
+									alt={`Vanille De Tahiti By Perris`}
+								/>
+							</div>
 						</Carousel.Item>
 					</Carousel>
 				</div>

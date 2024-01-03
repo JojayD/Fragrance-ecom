@@ -7,15 +7,20 @@
 	filter: invert(0.5);
 }
 
-.container__carousel {
-	height: 400px;
-	width: 400px;
-  overflow: hidden;
-	margin: 5rem auto;
+.carousel-item-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
 }
 
+.container__carousel{
+	max-width: 400px;
+	margin: 0 auto;
+}
 
 .custom-carousel .carousel-item img {
-  object-fit: cover;
-	max-height: 40vh;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; 
 }
