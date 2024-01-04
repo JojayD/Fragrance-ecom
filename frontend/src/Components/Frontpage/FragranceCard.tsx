@@ -7,6 +7,7 @@ interface Fragrance {
 	Description: string;
 	Notes: string;
 	ImageURL: string;
+	Price: number;
 }
 
 type Props = { data: Fragrance };
@@ -26,7 +27,6 @@ export default function Fragrance({ data }: Props) {
 		data.Description.slice(0, 50)
 	);
 	useEffect(() => {
-		console.log(data);
 		
 	}, []);
 
@@ -43,7 +43,12 @@ export default function Fragrance({ data }: Props) {
 	return (
 		<>
 			<div className={styles.container__fragrance}>
-				{data.ImageURL !== ""&& <img src={data.ImageURL} />}
+				{data.ImageURL !== "" && (
+					<div className={styles["container__fragrance-img"]}>
+						<img src={data.ImageURL} />
+					</div>
+				)}
+				<p>${data.Price}</p>
 				<p>Fragrance Name: {data.Name}</p>
 				<p>{data.Brand}</p>
 				<p>{description}</p>

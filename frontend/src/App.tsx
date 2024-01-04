@@ -15,6 +15,7 @@ interface Fragrance {
 	Description: string;
 	Notes: string;
 	ImageURL: string;
+	Price: number;
 }
 
 export default function App() {

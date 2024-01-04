@@ -14,6 +14,7 @@ interface Fragrance {
 	Description: string;
 	Notes: string;
 	ImageURL: string;
+	Price: number;
 }
 
 function MyButton({ title, func }: MyButtonProps) {
@@ -33,24 +34,39 @@ const Search: React.FC<SearchProps> = ({
 	const [fragranceQuery, setFragranceQuery] = useState<string>("");
 	const [filteredItems, setFilteredItems] = useState<Fragrance[]>([]);
 
-	function checkHomeSearched() {
-		if (headerSearchBar) {
-			setFragranceQuery(headerSearchBar);
-		} else {
-			setFragranceQuery(""); // Set a default value if headerSearchBar is undefined
-		}
-	}
 	useEffect(() => {}, [filterNameButton]);
 
 	useEffect(() => {
 		if (headerSearchBar) {
+			console.log("here");
 			setFragranceQuery(headerSearchBar);
+			searchFromHeader();
 		}
-	}, [headerSearchBar]);
+	}, []);
 
 	function handleInput(event: any) {
 		const input = event.target.value;
 		setFragranceQuery(input);
+	}
+
+	function searchFromHeader() {
+		console.log(listOfFragrances);
+		
+		const listFound = listOfFragrances.filter((fragrance) => {
+			const loweredInputValue = headerSearchBar
+				? headerSearchBar.toLowerCase()
+				: "";
+			if (fragrance.Brand.toLowerCase().includes(loweredInputValue)) {
+				return (fragrance.Brand && fragrance.Brand.toLowerCase().includes(loweredInputValue));
+			} else if (fragrance.Name.toLowerCase().includes(loweredInputValue)) {
+				return (fragrance.Name && fragrance.Name.toLowerCase().includes(loweredInputValue));
+			} else {
+				return (fragrance.Notes && fragrance.Notes.toLowerCase().includes(loweredInputValue));
+			}
+		});
+		
+		setFilteredItems(listFound);
+		console.log(filteredItems);
 	}
 
 	function filteringSearch() {
