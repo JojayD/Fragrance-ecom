@@ -1,13 +1,12 @@
 import "./App.css";
 import { useUserContext } from "../context/UserProvider";
-// import Header from "./Components/Frontpage/Header";
+import Cart from "./Components/Frontpage/Cart";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
 import Search from "./Components/Frontpage/Search";
 import LandingPage from "./Components/Frontpage/LandingPage";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 
 interface Fragrance {
 	Name: string;
@@ -57,6 +56,7 @@ export default function App() {
 					path="/Search"
 					element={<Search listOfFragrances={listOfFragrances} headerSearchBar = {headerSearchBar}/>}
 				/>
+				<Route path="/Cart" element={<Cart/>}/>
 			</Routes>
 		</div>
 	);

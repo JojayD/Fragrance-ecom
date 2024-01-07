@@ -43,6 +43,11 @@ li {
 	text-decoration: none;
 }
 
+.container__header-li-el img{
+	width: 20px;
+	height: 20px;
+}
+
 .container__header {
 	width: 100%;
 	max-width: 1200px;

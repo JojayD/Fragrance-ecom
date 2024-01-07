@@ -2,12 +2,15 @@ import styles from "/frontend/src/Styles/Header.module.css";
 import { Link } from "react-router-dom";
 import Cart from "/frontend/src/assets/cart-shopping-solid.svg";
 import { useNavigate } from "react-router-dom";
-import fragance_panel from "/frontend/src/assets/frag_panel.svg";
 import { Form, Dropdown } from "react-bootstrap";
 import { useUserContext } from "../../../context/UserProvider";
-type Props = {};
+type Props = {
+	showSearch?: boolean;
+	showSignIn?: boolean;
+	showCart? : boolean;
+};
 
-export default function Header({}: Props) {
+export default function Header({ showSearch = true }: Props) {
 	const navigate = useNavigate();
 	const { headerSearchBar, setHeaderSearchBar } = useUserContext();
 	function handleKeyDownEvent(event: any) {
@@ -15,8 +18,8 @@ export default function Header({}: Props) {
 			console.log(`${headerSearchBar}`);
 			const encodedQuery = encodeURIComponent(headerSearchBar);
 			console.log(encodedQuery);
-			// navigate(`/search-results?query=${encodedQuery}`); 
-			navigate(`/Search`)
+			// navigate(`/search-results?query=${encodedQuery}`);
+			navigate(`/Search`);
 		}
 	}
 
@@ -43,50 +46,45 @@ export default function Header({}: Props) {
 						Fragrances
 					</Link>
 					<Link
-						to={``}
-						className={styles["container__header-li-el"]}
-					>
-						Shipping
-					</Link>
-					<Link
 						to={`/`}
 						className={styles["container__header-li-el"]}
 					>
 						Sign in
 					</Link>
 					<div className={styles["container__fonts"]}>
-						<img
-							src={Cart}
-							alt=''
-						/>
-						<Dropdown className={styles["no-dropdown-arrow"]}>
-							<Dropdown.Toggle
-								variant='primary'
-								id='dropdown-basic'
-							>
-								Search
-							</Dropdown.Toggle>
+						{showSearch && (
+							<Dropdown className={styles["no-dropdown-arrow"]}>
+								<Dropdown.Toggle
+									variant='primary'
+									id='dropdown-basic'
+								>
+									Search
+								</Dropdown.Toggle>
 
-							<Dropdown.Menu>
-								<Dropdown.Item href='#/action-1'>
-									<Form.Control
-										size='sm'
-										type='text'
-										placeholder='Small text'
-										onClick={(e) => e.stopPropagation()}
-										onChange={changeHandler}
-										value={headerSearchBar}
-										onKeyDown={handleKeyDownEvent}
-									/>
-								</Dropdown.Item>
-							</Dropdown.Menu>
-						</Dropdown>
+								<Dropdown.Menu>
+									<Dropdown.Item href='#/action-1'>
+										<Form.Control
+											size='sm'
+											type='text'
+											placeholder='Small text'
+											onClick={(e) => e.stopPropagation()}
+											onChange={changeHandler}
+											value={headerSearchBar}
+											onKeyDown={handleKeyDownEvent}
+										/>
+									</Dropdown.Item>
+								</Dropdown.Menu>
+							</Dropdown>
+						)}
 					</div>
+					<Link
+						to={`/Cart`}
+						className={styles["container__header-li-el"]}
+					>
+						<img src={Cart} />
+					</Link>
 				</li>
 			</header>
-			<div className={styles["container__img"]}>
-				<img src={fragance_panel} />
-			</div>
 		</div>
 	);
 }

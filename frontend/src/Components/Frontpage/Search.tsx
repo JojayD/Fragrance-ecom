@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import FragranceCard from "../Frontpage/FragranceCard";
 import { Button, FormControl, Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import styles from "/frontend/src/Styles/Search.module.css";
+import Header from "./Header";
 interface MyButtonProps {
 	title: string;
 	func?: () => any;
@@ -51,20 +51,28 @@ const Search: React.FC<SearchProps> = ({
 
 	function searchFromHeader() {
 		console.log(listOfFragrances);
-		
+
 		const listFound = listOfFragrances.filter((fragrance) => {
 			const loweredInputValue = headerSearchBar
 				? headerSearchBar.toLowerCase()
 				: "";
 			if (fragrance.Brand.toLowerCase().includes(loweredInputValue)) {
-				return (fragrance.Brand && fragrance.Brand.toLowerCase().includes(loweredInputValue));
+				return (
+					fragrance.Brand &&
+					fragrance.Brand.toLowerCase().includes(loweredInputValue)
+				);
 			} else if (fragrance.Name.toLowerCase().includes(loweredInputValue)) {
-				return (fragrance.Name && fragrance.Name.toLowerCase().includes(loweredInputValue));
+				return (
+					fragrance.Name && fragrance.Name.toLowerCase().includes(loweredInputValue)
+				);
 			} else {
-				return (fragrance.Notes && fragrance.Notes.toLowerCase().includes(loweredInputValue));
+				return (
+					fragrance.Notes &&
+					fragrance.Notes.toLowerCase().includes(loweredInputValue)
+				);
 			}
 		});
-		
+
 		setFilteredItems(listFound);
 		console.log(filteredItems);
 	}
@@ -102,6 +110,12 @@ const Search: React.FC<SearchProps> = ({
 		setFilteredItems(filteredFragrances);
 	}
 
+	function handleKeyDownEvent(event: any) {
+		if (event.key == "Enter") {
+			filteringSearch()
+		}
+	}
+
 	const renderFragrances = () => {
 		return filteredItems.map((data, index) => (
 			<FragranceCard
@@ -125,42 +139,45 @@ const Search: React.FC<SearchProps> = ({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles["container__form-control"]}>
-				<FormControl
-					type='text'
-					value={fragranceQuery}
-					onChange={handleInput}
-				/>
-			</div>
-			<div className={styles["container__search-buttons"]}>
-				<div className={styles["container__search-buttons-item"]}>
-					<Link to={"/"}>
-						<MyButton title='Back' />
-					</Link>
-				</div>
-
-				<div className={styles["container__search-buttons-item"]}>
-					<Dropdown onSelect={handleDropDownSelect}>
-						<Dropdown.Toggle
-							variant='primary'
-							id='dropdown-basic'
-						>
-							{filterNameButton}
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item eventKey='Brand'>Brand</Dropdown.Item>
-
-							<Dropdown.Item eventKey='Name'>Name</Dropdown.Item>
-
-							<Dropdown.Item eventKey='Notes'>Notes</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-				</div>
-				<div className={styles["container__search-buttons-item"]}>
-					<MyButton
-						title='Search'
-						func={filteringSearch}
+			<Header showSearch={false} />
+			<div className={styles["container__forms"]}>
+				<div className={styles["container__form-control"]}>
+					<FormControl
+						type='text'
+						value={fragranceQuery}
+						onChange={handleInput}
+						onKeyDown={handleKeyDownEvent}
+						
 					/>
+				</div>
+				<div className={styles["container__search-buttons"]}>
+					{/* <div className={styles["container__search-buttons-item"]}>
+						<Link to={"/"}>
+							<MyButton title='Back' />
+						</Link>
+					</div> */}
+
+					<div className={styles["container__search-buttons-item"]}>
+						<Dropdown onSelect={handleDropDownSelect}>
+							<Dropdown.Toggle
+								variant='primary'
+								id='dropdown-basic'
+							>
+								{filterNameButton}
+							</Dropdown.Toggle>
+							<Dropdown.Menu>
+								<Dropdown.Item eventKey='Brand'>Brand</Dropdown.Item>
+								<Dropdown.Item eventKey='Name'>Name</Dropdown.Item>
+								<Dropdown.Item eventKey='Notes'>Notes</Dropdown.Item>
+							</Dropdown.Menu>
+						</Dropdown>
+					</div>
+					<div className={styles["container__search-buttons-item"]}>
+						<MyButton
+							title='Search'
+							func={filteringSearch}
+						/>
+					</div>
 				</div>
 			</div>
 			<div className={styles["container__filtered-items"]}>

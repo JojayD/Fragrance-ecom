@@ -24,3 +24,18 @@
   max-height: 100%;
   object-fit: contain; 
 }
+
+.container__img {
+	max-height: 300px;
+  max-width: 1200px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.container__img img{
+  /* object-fit: cover; */
+  width: 100%;
+}

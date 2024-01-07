@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-
+import fragance_panel from "/frontend/src/assets/frag_panel.svg";
 import Carousel from "react-bootstrap/Carousel";
 import "/frontend/src/Styles/LandingPage.css";
 import Header from "./Header";
@@ -16,7 +15,6 @@ export default function LandingPage({}: Props) {
 
 		return (
 			<>
-				<Header />
 				<div className='container__carousel'>
 					<Carousel
 						activeIndex={index}
@@ -61,5 +59,13 @@ export default function LandingPage({}: Props) {
 		);
 	}
 
-	return <div>{ControlledCarousel()}</div>;
+	return (
+		<div>
+			<Header />
+			<div className='container__img'>
+				<img src={fragance_panel} />
+			</div>
+			<div>{ControlledCarousel()}</div>
+		</div>
+	);
 }
