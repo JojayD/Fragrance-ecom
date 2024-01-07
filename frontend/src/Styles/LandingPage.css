@@ -1,0 +1,41 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+	filter: invert(1);
+}
+
+.carousel-indicators {
+	filter: invert(0.5);
+}
+
+.carousel-item-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+.container__carousel{
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.custom-carousel .carousel-item img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; 
+}
+
+.container__img {
+	max-height: 300px;
+  max-width: 1200px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+}
+
+.container__img img{
+  /* object-fit: cover; */
+  width: 100%;
+}
