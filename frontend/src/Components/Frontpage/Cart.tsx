@@ -14,6 +14,7 @@ interface Fragrance {
 	Notes: string;
 	ImageURL: string;
 	Price: number;
+	Id: string;
 }
 
 interface MyButtonProps {
@@ -46,6 +47,7 @@ function Cart({}: Props) {
 						Notes: doc.data().Notes,
 						ImageURL: doc.data().ImageURL,
 						Price: doc.data().Price,
+						Id: doc.data().Id
 					});
 				});
 				setStoredFragrance(items);
@@ -67,6 +69,7 @@ function Cart({}: Props) {
 					Notes: doc.data().Notes,
 					ImageURL: doc.data().ImageURL,
 					Price: doc.data().Price,
+					Id: doc.data().Id,
 				});
 			});
 
@@ -79,7 +82,7 @@ function Cart({}: Props) {
 		return storedFragrance.map((data, index) => (
 			<FragranceCard
 				data={data}
-				key={index}
+				key={data.Id}
 				showRemoveBag={true}
 				showAddBag={false}
 			/>

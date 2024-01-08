@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import styles from "/frontend/src/Styles/Fragrance.module.css";
+import { useNavigate } from "react-router";
 import {
 	collection,
 	addDoc,
@@ -9,8 +10,7 @@ import {
 	where,
 	getDocs,
 	doc,
-	deleteDoc
-
+	deleteDoc,
 } from "firebase/firestore";
 import { app } from "/Users/jojo/Desktop/Web-Dev-Projects/fragrance_ecom/backend/firebase/firebase";
 interface Fragrance {
@@ -20,12 +20,16 @@ interface Fragrance {
 	Notes: string;
 	ImageURL: string;
 	Price: number;
+	Id: string;
 }
 
 type Props = {
 	data: Fragrance;
 	showAddBag?: boolean;
 	showRemoveBag?: boolean;
+	showDescription?: boolean;
+	isDynamic?: boolean;
+	showQuantity?: boolean;
 };
 interface MyButtonProps {
 	title: String;
@@ -40,19 +44,36 @@ export default function FragranceCard({
 	data,
 	showAddBag = true,
 	showRemoveBag = false,
+	showDescription = true,
+	isDynamic = false,
 }: Props) {
 	const db = getFirestore(app);
 	const longDescription = data.Description;
 	const [viewStatus, setViewStatus] = useState<Boolean>(false);
 	const [description, setDescription] = useState<String>(
-		data.Description.slice(0, 50)
+		data.Description.slice(0, 100)
 	);
-	function viewMoreHandler() {
+	const navigate = useNavigate();
+
+	//Dynamic CSS
+	const title = viewStatus ? "minimize" : "expand"
+	const classNameContainer = isDynamic
+		? styles["container__fragrance__true"]
+		: styles["container__fragrance__false"];
+	const classNameImg = isDynamic
+		? styles["container__fragrance-img-true"]
+		: styles["container__fragrance-img-false"];
+	const dynamicGridRight = isDynamic ? styles["container__grid-right"] : "";
+		//End Dynamic CSS
+	const viewMoreHandler = () => {
+		navigate(`/fragrance-detail/${data.Id}`);
+	};
+	function handleDescription() {
 		if (data.Description.length > 200 && viewStatus === false) {
 			setDescription(longDescription);
 			setViewStatus((prev) => !prev);
 		} else {
-			setDescription(data.Description.substring(0, 50));
+			setDescription(data.Description.substring(0, 200));
 			setViewStatus((prev) => !prev);
 		}
 	}
@@ -73,11 +94,11 @@ export default function FragranceCard({
 						Description: data.Description,
 						Notes: data.Notes,
 						ImageURL: data.ImageURL,
-						Price: data.Price
+						Price: data.Price,
 					});
-					localStorage.setItem(`${data.Name}`,`${docRef.id}`)
+					localStorage.setItem(`${data.Name}`, `${docRef.id}`);
 					console.log(docRef.id);
-					
+
 					console.log("Document written with ID: ", docRef.id);
 				} catch (e) {
 					console.error("Error adding document: ", e);
@@ -92,11 +113,12 @@ export default function FragranceCard({
 
 	async function removeFromBag() {
 		try {
-			await deleteDoc(doc(db, "savedFragrances", `${localStorage.getItem(`${data.Name}`)}`));
+			await deleteDoc(
+				doc(db, "savedFragrances", `${localStorage.getItem(`${data.Name}`)}`)
+			);
 			console.log("Removed item");
-			
-			localStorage.removeItem(`${data.Name}`)
-			
+
+			localStorage.removeItem(`${data.Name}`);
 		} catch (e) {
 			console.log("Logging error", e);
 		}
@@ -104,35 +126,44 @@ export default function FragranceCard({
 
 	return (
 		<>
-			<div className={styles.container__fragrance}>
+			<div className={classNameContainer}>
 				{data.ImageURL !== "" && (
-					<div className={styles["container__fragrance-img"]}>
+					<div className={classNameImg}>
 						<img src={data.ImageURL} />
 					</div>
 				)}
-				<p>${data.Price}</p>
-				<p>Fragrance Name: {data.Name}</p>
-				<p>{data.Brand}</p>
-				<p>{description}</p>
-				<div>
-					<MyButton
-						title={`View More`}
-						func={viewMoreHandler}
-					/>
-
-					{showAddBag && (
+				<div className={dynamicGridRight}>
+					<b>${data.Price}</b>
+					<p>{data.Name}</p>
+					<p >{data.Brand}</p>
+					<p style={{fontSize: "13px"}}>{showDescription && description}</p>
+					<div className={styles["container__buttons"]}>
 						<MyButton
-							title={`Add`}
-							func={addToBagHandler}
+							title={`View More`}
+							func={viewMoreHandler}
 						/>
-					)}
 
-					{showRemoveBag && (
-						<MyButton
-							title={`Remove`}
-							func={removeFromBag}
-						/>
-					)}
+						{showDescription && (
+							<MyButton
+								title={title}
+								func={handleDescription}
+							/>
+						)}
+
+						{showAddBag && (
+							<MyButton
+								title={`Add`}
+								func={addToBagHandler}
+							/>
+						)}
+
+						{showRemoveBag && (
+							<MyButton
+								title={`Remove`}
+								func={removeFromBag}
+							/>
+						)}
+					</div>
 				</div>
 			</div>
 		</>

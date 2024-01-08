@@ -76,6 +76,7 @@ export default function Header({ showSearch = true }: Props) {
 								</Dropdown.Menu>
 							</Dropdown>
 						)}
+						
 					</div>
 					<Link
 						to={`/Cart`}

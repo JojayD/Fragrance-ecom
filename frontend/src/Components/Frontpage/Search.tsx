@@ -3,6 +3,7 @@ import FragranceCard from "../Frontpage/FragranceCard";
 import { Button, FormControl, Dropdown } from "react-bootstrap";
 import styles from "/frontend/src/Styles/Search.module.css";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 interface MyButtonProps {
 	title: string;
 	func?: () => any;
@@ -15,6 +16,7 @@ interface Fragrance {
 	Notes: string;
 	ImageURL: string;
 	Price: number;
+	Id: string;
 }
 
 function MyButton({ title, func }: MyButtonProps) {
@@ -112,16 +114,24 @@ const Search: React.FC<SearchProps> = ({
 
 	function handleKeyDownEvent(event: any) {
 		if (event.key == "Enter") {
-			filteringSearch()
+			filteringSearch();
 		}
 	}
 
 	const renderFragrances = () => {
 		return filteredItems.map((data, index) => (
-			<FragranceCard
-				key={index}
-				data={data}
-			/>
+			<Link
+				style={{ textDecoration: "none", color: "black" }}
+				key={data.Id}
+				to={`/fragrance-detail/${data.Id}`}
+			>
+				<FragranceCard
+					isDynamic={false}
+					key={data.Id}
+					data={data}
+					showDescription={false}
+				/>
+			</Link>
 		));
 	};
 
@@ -147,16 +157,9 @@ const Search: React.FC<SearchProps> = ({
 						value={fragranceQuery}
 						onChange={handleInput}
 						onKeyDown={handleKeyDownEvent}
-						
 					/>
 				</div>
 				<div className={styles["container__search-buttons"]}>
-					{/* <div className={styles["container__search-buttons-item"]}>
-						<Link to={"/"}>
-							<MyButton title='Back' />
-						</Link>
-					</div> */}
-
 					<div className={styles["container__search-buttons-item"]}>
 						<Dropdown onSelect={handleDropDownSelect}>
 							<Dropdown.Toggle
@@ -179,9 +182,9 @@ const Search: React.FC<SearchProps> = ({
 						/>
 					</div>
 				</div>
-			</div>
 			<div className={styles["container__filtered-items"]}>
 				{renderFragrances()}
+			</div>
 			</div>
 		</div>
 	);

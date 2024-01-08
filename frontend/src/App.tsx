@@ -7,6 +7,7 @@ import Search from "./Components/Frontpage/Search";
 import LandingPage from "./Components/Frontpage/LandingPage";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import FragranceCardWrapper from "./Components/Frontpage/FragranceCardWrapper";
 
 interface Fragrance {
 	Name: string;
@@ -15,12 +16,13 @@ interface Fragrance {
 	Notes: string;
 	ImageURL: string;
 	Price: number;
+	Id: string;
 }
 
 export default function App() {
 	const { headerSearchBar } = useUserContext();
 	const [listOfFragrances, setListOfFragrances] = useState<Fragrance[]>([]);
-	
+
 	useEffect(() => {
 		fetchData();
 	}, []);
@@ -28,7 +30,6 @@ export default function App() {
 	useEffect(() => {
 		console.log("Current listOfFragrances state:", listOfFragrances);
 	}, [listOfFragrances]);
-
 
 	async function fetchData() {
 		try {
@@ -53,10 +54,23 @@ export default function App() {
 					element={<Search listOfFragrances={listOfFragrances} />}
 				/>
 				<Route
-					path="/Search"
-					element={<Search listOfFragrances={listOfFragrances} headerSearchBar = {headerSearchBar}/>}
+					path='/Search'
+					element={
+						<Search
+							listOfFragrances={listOfFragrances}
+							headerSearchBar={headerSearchBar}
+						/>
+					}
 				/>
-				<Route path="/Cart" element={<Cart/>}/>
+				<Route
+					path='/Cart'
+					element={<Cart />}
+				/>
+
+				<Route
+					path='/fragrance-detail/:id'
+					element={<FragranceCardWrapper listOfFragrances={listOfFragrances} />}
+				/>
 			</Routes>
 		</div>
 	);
