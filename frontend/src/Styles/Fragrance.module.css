@@ -1,0 +1,47 @@
+.container__fragrance__false {
+	width: 100%;
+	max-width: 600px;
+	margin: 20px auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: column;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	flex-grow: 1;
+	padding: 8px;
+}
+.container__fragrance-img-false {
+	height: 150px;
+}
+
+.container__fragrance-img-false img {
+	max-height: 100%;
+	width: auto;
+	display: block;
+}
+
+.container__fragrance__true {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	justify-content: center;
+	align-items: center;
+	max-width: 800px;
+	gap: 16px;
+}
+
+.container__fragrance-img-true {
+	height: 350px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.container__fragrance-img-true img {
+	max-height: 100%;
+	width: auto;
+	display: block;
+}
+
+.container__buttons {
+	gap: 10px;
+	display: flex;
+}

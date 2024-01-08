@@ -1,0 +1,34 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+.container__forms {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-direction: column;
+}
+
+.container__search-buttons {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.container__form-control {
+	max-width: 400px;
+}
+
+.container__filtered-items {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 8px;
+	max-width: 1200px;
+	align-items: center;
+	justify-content: center;
+}
+
+.container__search-buttons-item {
+	max-width: 70px;
+}
