@@ -1,6 +1,7 @@
 .container__fragrance__false {
 	width: 100%;
-	max-width: 600px;
+	height: 100%;
+	max-width: 100%;
 	margin: 20px auto;
 	display: flex;
 	align-items: center;
@@ -9,6 +10,7 @@
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 	flex-grow: 1;
 	padding: 8px;
+	
 }
 .container__fragrance-img-false {
 	height: 150px;
@@ -44,4 +46,31 @@
 .container__buttons {
 	gap: 10px;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container__buttons button{
+	height: 40px;
+}
+
+.container__quantity{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	
+}
+.wrapper__quantity-state{
+	display: flex;
+	justify-content: center;
+}
+
+.quantity-button{
+	height: 32px !important;
+	text-align: center;
+}
+
+.wrapper__buttons{
+	display: flex;
+	gap:8px;
 }

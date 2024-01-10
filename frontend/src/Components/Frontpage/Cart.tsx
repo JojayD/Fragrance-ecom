@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import FragranceCard from "./FragranceCard";
 import { onSnapshot } from "firebase/firestore";
 import Header from "./Header";
+import styles from "/frontend/src/Styles/Cart.module.css";
 type Props = {};
 
 interface Fragrance {
@@ -15,6 +16,7 @@ interface Fragrance {
 	ImageURL: string;
 	Price: number;
 	Id: string;
+	Quantity: number;
 }
 
 interface MyButtonProps {
@@ -29,9 +31,12 @@ function MyButton({ title, func }: MyButtonProps) {
 function Cart({}: Props) {
 	const db = getFirestore(app);
 	const [storedFragrance, setStoredFragrance] = useState<Fragrance[]>([]);
+	const [total, setTotal] = useState<number>(0);
+
+	useEffect(() => {}, []);
 
 	useEffect(() => {
-		console.log("Stored fragrance: ", storedFragrance);
+		addPrice();
 	}, [storedFragrance]);
 
 	useEffect(() => {
@@ -47,7 +52,8 @@ function Cart({}: Props) {
 						Notes: doc.data().Notes,
 						ImageURL: doc.data().ImageURL,
 						Price: doc.data().Price,
-						Id: doc.data().Id
+						Id: doc.data().Id,
+						Quantity: doc.data().Quantity,
 					});
 				});
 				setStoredFragrance(items);
@@ -70,6 +76,7 @@ function Cart({}: Props) {
 					ImageURL: doc.data().ImageURL,
 					Price: doc.data().Price,
 					Id: doc.data().Id,
+					Quantity: doc.data().Quantity,
 				});
 			});
 
@@ -78,6 +85,34 @@ function Cart({}: Props) {
 		getDataSnapShot();
 	}, []);
 
+	function addPrice() {
+		console.log("going in addPrice");
+
+		if (storedFragrance.length == 1) {
+			setTotal(storedFragrance[0].Price);
+		} else {
+			let arr: number[] = [];
+			let price: number = 0;
+			storedFragrance.forEach((prod) => {
+				if (prod.Quantity > 0) {
+					arr.push(prod.Price * prod.Quantity);
+				} else {
+					arr.push(prod.Price);
+				}
+			});
+
+			arr.forEach((el) => {
+				price += el;
+			});
+			console.log("logging price: ", price);
+
+			let finalPrice: number = price * 0.0875 + price;
+			let fixedPrice = finalPrice.toFixed(2);
+
+			setTotal(parseFloat(fixedPrice));
+		}
+	}
+
 	function renderSavedFragrances() {
 		return storedFragrance.map((data, index) => (
 			<FragranceCard
@@ -85,15 +120,22 @@ function Cart({}: Props) {
 				key={data.Id}
 				showRemoveBag={true}
 				showAddBag={false}
+				showQuantity={true}
+				showViewMore={false}
 			/>
 		));
 	}
 
 	return (
-		<div>
+		<>
 			<Header />
-			<div>{renderSavedFragrances()}</div>
-		</div>
+			<div className={styles.container__cart}>
+				<div>Total: {total}</div>
+				<div className={styles.container__renderSavedFragrances}>
+					{renderSavedFragrances()}
+				</div>
+			</div>
+		</>
 	);
 }
 

@@ -17,6 +17,7 @@ interface Fragrance {
 	ImageURL: string;
 	Price: number;
 	Id: string;
+	Quantity: number;
 }
 
 function MyButton({ title, func }: MyButtonProps) {
@@ -124,6 +125,8 @@ const Search: React.FC<SearchProps> = ({
 				style={{ textDecoration: "none", color: "black" }}
 				key={data.Id}
 				to={`/fragrance-detail/${data.Id}`}
+				className={styles.fragarnce__link}
+				onClick={(event)=>event.preventDefault()}
 			>
 				<FragranceCard
 					isDynamic={false}
@@ -131,7 +134,7 @@ const Search: React.FC<SearchProps> = ({
 					data={data}
 					showDescription={false}
 				/>
-			</Link>
+			</Link> 	 	
 		));
 	};
 

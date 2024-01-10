@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import styles from "/frontend/src/Styles/Fragrance.module.css";
 import { useNavigate } from "react-router";
@@ -11,6 +11,7 @@ import {
 	getDocs,
 	doc,
 	deleteDoc,
+	updateDoc,
 } from "firebase/firestore";
 import { app } from "/Users/jojo/Desktop/Web-Dev-Projects/fragrance_ecom/backend/firebase/firebase";
 interface Fragrance {
@@ -21,6 +22,7 @@ interface Fragrance {
 	ImageURL: string;
 	Price: number;
 	Id: string;
+	Quantity: number;
 }
 
 type Props = {
@@ -30,7 +32,9 @@ type Props = {
 	showDescription?: boolean;
 	isDynamic?: boolean;
 	showQuantity?: boolean;
+	showViewMore?: boolean;
 };
+
 interface MyButtonProps {
 	title: String;
 	func?: () => void;
@@ -46,6 +50,8 @@ export default function FragranceCard({
 	showRemoveBag = false,
 	showDescription = true,
 	isDynamic = false,
+	showQuantity = false,
+	showViewMore = true,
 }: Props) {
 	const db = getFirestore(app);
 	const longDescription = data.Description;
@@ -53,10 +59,11 @@ export default function FragranceCard({
 	const [description, setDescription] = useState<String>(
 		data.Description.slice(0, 100)
 	);
+	const [quantity, setQuantity] = useState<number>(data.Quantity);
 	const navigate = useNavigate();
 
 	//Dynamic CSS
-	const title = viewStatus ? "minimize" : "expand"
+	const title = viewStatus ? "minimize" : "expand";
 	const classNameContainer = isDynamic
 		? styles["container__fragrance__true"]
 		: styles["container__fragrance__false"];
@@ -64,7 +71,12 @@ export default function FragranceCard({
 		? styles["container__fragrance-img-true"]
 		: styles["container__fragrance-img-false"];
 	const dynamicGridRight = isDynamic ? styles["container__grid-right"] : "";
-		//End Dynamic CSS
+	//End Dynamic CSS
+
+	useEffect(() => {
+		updateQuantityHandler();
+	}, [quantity]);
+
 	const viewMoreHandler = () => {
 		navigate(`/fragrance-detail/${data.Id}`);
 	};
@@ -95,6 +107,7 @@ export default function FragranceCard({
 						Notes: data.Notes,
 						ImageURL: data.ImageURL,
 						Price: data.Price,
+						Quantity: 1,
 					});
 					localStorage.setItem(`${data.Name}`, `${docRef.id}`);
 					console.log(docRef.id);
@@ -124,6 +137,19 @@ export default function FragranceCard({
 		}
 	}
 
+	async function updateQuantityHandler() {
+		console.log(localStorage.getItem(`${data.Name}`));
+
+		const fragraceDoc = doc(
+			db,
+			"savedFragrances",
+			`${localStorage.getItem(`${data.Name}`)}`
+		);
+		await updateDoc(fragraceDoc, {
+			Quantity: quantity,
+		});
+	}
+
 	return (
 		<>
 			<div className={classNameContainer}>
@@ -135,13 +161,15 @@ export default function FragranceCard({
 				<div className={dynamicGridRight}>
 					<b>${data.Price}</b>
 					<p>{data.Name}</p>
-					<p >{data.Brand}</p>
-					<p style={{fontSize: "13px"}}>{showDescription && description}</p>
+					<p>{data.Brand}</p>
+					<p style={{ fontSize: "13px" }}>{showDescription && description}</p>
 					<div className={styles["container__buttons"]}>
-						<MyButton
-							title={`View More`}
-							func={viewMoreHandler}
-						/>
+						{showViewMore && (
+							<MyButton
+								title={`View More`}
+								func={viewMoreHandler}
+							/>
+						)}
 
 						{showDescription && (
 							<MyButton
@@ -162,6 +190,32 @@ export default function FragranceCard({
 								title={`Remove`}
 								func={removeFromBag}
 							/>
+						)}
+
+						{showQuantity && (
+							<div className={styles.container__quantity}>
+								<div className={styles["wrapper__quantity-state"]}>{quantity}</div>
+								<div className={styles.wrapper__buttons}>
+									<Button
+										size='sm'
+										className={styles["quantity-button"]}
+										onClick={() => {
+											setQuantity(quantity + 1);
+											console.log("incrementig");
+										}}
+									>
+										+
+									</Button>
+									<Button
+										className={styles["quantity-button"]}
+										onClick={() => {
+											quantity > 0 && setQuantity(quantity - 1);
+										}}
+									>
+										-
+									</Button>
+								</div>
+							</div>
 						)}
 					</div>
 				</div>

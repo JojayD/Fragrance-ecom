@@ -32,3 +32,9 @@
 .container__search-buttons-item {
 	max-width: 70px;
 }
+
+a{
+	display: block; /* or inline-block */	
+	height: 100%; /* adjust as needed */
+	/* additional styling */
+}
