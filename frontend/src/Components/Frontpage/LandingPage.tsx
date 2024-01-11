@@ -3,6 +3,7 @@ import fragance_panel from "/frontend/src/assets/frag_panel.svg";
 import Carousel from "react-bootstrap/Carousel";
 import "/frontend/src/Styles/LandingPage.css";
 import Header from "./Header";
+import Footer from "./Footer";
 type Props = {};
 
 export default function LandingPage({}: Props) {
@@ -60,12 +61,13 @@ export default function LandingPage({}: Props) {
 	}
 
 	return (
-		<div>
+		<div className='container'>
 			<Header />
 			<div className='container__img'>
 				<img src={fragance_panel} />
 			</div>
 			<div>{ControlledCarousel()}</div>
+			<Footer />
 		</div>
 	);
 }

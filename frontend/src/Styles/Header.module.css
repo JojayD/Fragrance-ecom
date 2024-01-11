@@ -5,6 +5,7 @@ header {
 .container{
 	margin: 1.5rem;
 	text-align: center;
+	width: 100%;
 }
 
 li {
@@ -48,10 +49,8 @@ li {
 	height: 20px;
 }
 
-.container__header {
-	width: 100%;
-	max-width: 1200px;
-	justify-content: center;
+
+.container__header{
 	background-color: #d8dfe6;
 	padding: 0.5rem;
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;

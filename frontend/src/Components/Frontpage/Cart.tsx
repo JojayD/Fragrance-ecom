@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { app } from "/Users/jojo/Desktop/Web-Dev-Projects/fragrance_ecom/backend/firebase/firebase";
 import { collection, getFirestore, getDocs } from "firebase/firestore";
 import { Button } from "react-bootstrap";
