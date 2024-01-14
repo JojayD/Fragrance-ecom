@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import FragranceCard from "./FragranceCard";
 import styles from "/frontend/src/Styles/FragranceWrapper.module.css";
 import Header from "./Header";
+import Recommender from "./Recommender";
 type Props = {
 	listOfFragrances: Fragrance[];
 };
@@ -33,13 +34,19 @@ export default function FragranceCardWrapper({ listOfFragrances }: Props) {
 
 	return (
 		<>
-		<Header/>
-		<div className={styles["container__fragrance-wrapper"]}>
-			<FragranceCard
-				isDynamic={true}
-				data={fragranceData}
-			/>
-		</div>
+			<Header />
+			<div className={styles["container__fragrance-wrapper"]}>
+				<FragranceCard
+					isDynamic={true}
+					data={fragranceData}
+				/>
+			</div>
+			<div>
+				<Recommender
+					listOfFragrances={listOfFragrances}
+					data={fragranceData}
+				/>
+			</div>
 		</>
 	);
 }

@@ -1,0 +1,9 @@
+.container__scrollable .row {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* .container__scrollable .col {
+    display: inline-flex;
+    white-space: normal;
+} */

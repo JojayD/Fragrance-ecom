@@ -166,7 +166,7 @@ export default function FragranceCard({
 					<div className={styles["container__buttons"]}>
 						{showViewMore && (
 							<MyButton
-								title={`View More`}
+								title={`View`}
 								func={viewMoreHandler}
 							/>
 						)}

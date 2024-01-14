@@ -126,7 +126,7 @@ const Search: React.FC<SearchProps> = ({
 				key={data.Id}
 				to={`/fragrance-detail/${data.Id}`}
 				className={styles.fragarnce__link}
-				onClick={(event)=>event.preventDefault()}
+				onClick={(event) => event.preventDefault()}
 			>
 				<FragranceCard
 					isDynamic={false}
@@ -134,7 +134,7 @@ const Search: React.FC<SearchProps> = ({
 					data={data}
 					showDescription={false}
 				/>
-			</Link> 	 	
+			</Link>
 		));
 	};
 
@@ -151,45 +151,47 @@ const Search: React.FC<SearchProps> = ({
 	}
 
 	return (
-		<div className={styles.container}>
+		<>
 			<Header showSearch={false} />
-			<div className={styles["container__forms"]}>
-				<div className={styles["container__form-control"]}>
-					<FormControl
-						type='text'
-						value={fragranceQuery}
-						onChange={handleInput}
-						onKeyDown={handleKeyDownEvent}
-					/>
-				</div>
-				<div className={styles["container__search-buttons"]}>
-					<div className={styles["container__search-buttons-item"]}>
-						<Dropdown onSelect={handleDropDownSelect}>
-							<Dropdown.Toggle
-								variant='primary'
-								id='dropdown-basic'
-							>
-								{filterNameButton}
-							</Dropdown.Toggle>
-							<Dropdown.Menu>
-								<Dropdown.Item eventKey='Brand'>Brand</Dropdown.Item>
-								<Dropdown.Item eventKey='Name'>Name</Dropdown.Item>
-								<Dropdown.Item eventKey='Notes'>Notes</Dropdown.Item>
-							</Dropdown.Menu>
-						</Dropdown>
-					</div>
-					<div className={styles["container__search-buttons-item"]}>
-						<MyButton
-							title='Search'
-							func={filteringSearch}
+			<div className={styles.container}>
+				<div className={styles["container__forms"]}>
+					<div className={styles["container__form-control"]}>
+						<FormControl
+							type='text'
+							value={fragranceQuery}
+							onChange={handleInput}
+							onKeyDown={handleKeyDownEvent}
 						/>
 					</div>
+					<div className={styles["container__search-buttons"]}>
+						<div className={styles["container__search-buttons-item"]}>
+							<Dropdown onSelect={handleDropDownSelect}>
+								<Dropdown.Toggle
+									variant='primary'
+									id='dropdown-basic'
+								>
+									{filterNameButton}
+								</Dropdown.Toggle>
+								<Dropdown.Menu>
+									<Dropdown.Item eventKey='Brand'>Brand</Dropdown.Item>
+									<Dropdown.Item eventKey='Name'>Name</Dropdown.Item>
+									<Dropdown.Item eventKey='Notes'>Notes</Dropdown.Item>
+								</Dropdown.Menu>
+							</Dropdown>
+						</div>
+						<div className={styles["container__search-buttons-item"]}>
+							<MyButton
+								title='Search'
+								func={filteringSearch}
+							/>
+						</div>
+					</div>
+					<div className={styles["container__filtered-items"]}>
+						{renderFragrances()}
+					</div>
 				</div>
-			<div className={styles["container__filtered-items"]}>
-				{renderFragrances()}
 			</div>
-			</div>
-		</div>
+		</>
 	);
 };
 export default Search;

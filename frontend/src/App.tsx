@@ -8,6 +8,7 @@ import LandingPage from "./Components/Frontpage/LandingPage";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import FragranceCardWrapper from "./Components/Frontpage/FragranceCardWrapper";
+import SignUpForm from "./Components/Frontpage/SignUpForm";
 
 interface Fragrance {
 	Name: string;
@@ -71,6 +72,11 @@ export default function App() {
 				<Route
 					path='/fragrance-detail/:id'
 					element={<FragranceCardWrapper listOfFragrances={listOfFragrances} />}
+				/>
+
+				<Route
+					path="/Sign-up"
+					element = {<SignUpForm/>}
 				/>
 			</Routes>
 		</div>

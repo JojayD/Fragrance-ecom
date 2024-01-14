@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "/frontend/src/Styles/Footer.module.css";
 import { Form } from "react-bootstrap";
 import fb from "/frontend/src/assets/icons8-facebook.svg";

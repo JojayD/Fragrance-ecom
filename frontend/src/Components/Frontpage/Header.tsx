@@ -46,7 +46,7 @@ export default function Header({ showSearch = true }: Props) {
 						Fragrances
 					</Link>
 					<Link
-						to={`/`}
+						to={`/Sign-up`}
 						className={styles["container__header-li-el"]}
 					>
 						Sign in
