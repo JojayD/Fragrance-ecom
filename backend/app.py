@@ -21,7 +21,7 @@ def index(path):
 @app.route('/api/get_data', methods=['GET'])
 def get_data():
     print("API recieved")
-    df = pandas.read_csv('/Users/jojo/Desktop/Web-Dev-Projects/fragrance_ecom/backend/final_perfume_data_with_prices.csv',
+    df = pandas.read_csv('final_perfume_data_with_prices.csv',
                          encoding='utf8', encoding_errors="ignore")
     records = df.to_json(orient='records')
 

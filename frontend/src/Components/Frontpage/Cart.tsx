@@ -1,5 +1,5 @@
 import  { useEffect, useState } from "react";
-import { app } from "/Users/jojo/Desktop/Web-Dev-Projects/fragrance_ecom/backend/firebase/firebase";
+import { app } from "../../../../backend/firebase/firebase";
 import { collection, getFirestore, getDocs } from "firebase/firestore";
 import { Button } from "react-bootstrap";
 import FragranceCard from "./FragranceCard";

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FragranceCard from "./FragranceCard";
-import { Container, Row, Col } from "react-bootstrap";
+
 
 import styles from "/frontend/src/Styles/Recommender.module.css";
 interface Fragrance {
@@ -33,7 +33,7 @@ export default function Recommender({ listOfFragrances, data }: Props) {
 		a1.filter((x) => a2.includes(x)).length;
 
 	const mapRecommendation = () => {
-		return listOfFragrances.map((fragrance, index) => {
+		return listOfFragrances.map((fragrance) => {
 			let currFragrance: string[] = [];
 			if (fragrance.Notes) {
 				currFragrance = fragrance.Notes.split(", ");
