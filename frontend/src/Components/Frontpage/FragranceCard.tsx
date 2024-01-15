@@ -63,6 +63,7 @@ export default function FragranceCard({
 	const navigate = useNavigate();
 
 	//Dynamic CSS
+
 	const title = viewStatus ? "minimize" : "expand";
 	const classNameContainer = isDynamic
 		? styles["container__fragrance__true"]

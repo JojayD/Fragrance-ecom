@@ -27,6 +27,8 @@ export default function Recommender({ listOfFragrances, data }: Props) {
 		console.log(`Notes of ${data.Name}`, notes);
 	}, []);
 
+	
+
 	const intersection = (a1: string[], a2: string[]) =>
 		a1.filter((x) => a2.includes(x)).length;
 
@@ -38,13 +40,12 @@ export default function Recommender({ listOfFragrances, data }: Props) {
 				currFragrance[0] = currFragrance[0].replace(" ", "");
 				if (intersection(currFragrance, notes) > 2) {
 					return (
-						<Col key={index}>
 							<FragranceCard
 								key={fragrance.Id}
 								data={fragrance}
 								showDescription={false}
 							/>
-						</Col>
+	 
 					);
 				}
 			}
@@ -53,15 +54,12 @@ export default function Recommender({ listOfFragrances, data }: Props) {
 
 	return (
 		<div className={styles.container}>
-			<h1>
+			<h2>
 				<b>You also might like these fragrances</b>
-			</h1>
-			<Container
-				fluid
-				className={styles.container__scrollable}
-			>
-				<Row>{mapRecommendation()}</Row>
-			</Container>
+			</h2>
+			<div className={styles.container__scrollable}>
+				{mapRecommendation()}
+			</div>
 		</div>
 	);
 }
