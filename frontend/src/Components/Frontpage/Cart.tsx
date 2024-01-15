@@ -1,7 +1,6 @@
 import  { useEffect, useState } from "react";
 import { app } from "../../../../backend/firebase/firebase";
 import { collection, getFirestore, getDocs } from "firebase/firestore";
-import { Button } from "react-bootstrap";
 import FragranceCard from "./FragranceCard";
 import { onSnapshot } from "firebase/firestore";
 import Header from "./Header";
@@ -19,14 +18,6 @@ interface Fragrance {
 	Quantity: number;
 }
 
-interface MyButtonProps {
-	title: String;
-	func?: () => void;
-}
-
-function MyButton({ title, func }: MyButtonProps) {
-	return <Button onClick={func}>{title}</Button>;
-}
 
 function Cart({}: Props) {
 	const db = getFirestore(app);
@@ -114,7 +105,7 @@ function Cart({}: Props) {
 	}
 
 	function renderSavedFragrances() {
-		return storedFragrance.map((data, index) => (
+		return storedFragrance.map((data) => (
 			<FragranceCard
 				data={data}
 				key={data.Id}
