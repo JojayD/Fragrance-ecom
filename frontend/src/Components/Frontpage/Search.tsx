@@ -120,7 +120,7 @@ const Search: React.FC<SearchProps> = ({
 	}
 
 	const renderFragrances = () => {
-		return filteredItems.map((data, index) => (
+		return filteredItems.map((data) => (
 			<Link
 				style={{ textDecoration: "none", color: "black" }}
 				key={data.Id}

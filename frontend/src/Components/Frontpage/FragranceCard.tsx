@@ -13,7 +13,7 @@ import {
 	deleteDoc,
 	updateDoc,
 } from "firebase/firestore";
-import { app } from "/Users/jojo/Desktop/Web-Dev-Projects/fragrance_ecom/backend/firebase/firebase";
+import { app } from "../../../../backend/firebase/firebase";
 interface Fragrance {
 	Name: string;
 	Brand: string;
