@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import styles from "/frontend/src/Styles/Fragrance.module.css";
 import { useNavigate } from "react-router";
+
 import {
 	collection,
 	addDoc,
