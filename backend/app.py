@@ -1,7 +1,5 @@
 import pandas
-import requests
 from flask_cors import CORS
-import json
 from flask import Flask, send_from_directory, jsonify, request, make_response
 
 
