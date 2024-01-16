@@ -1,0 +1,51 @@
+.container {
+
+	background-color: #d8dfe6;
+	width: 100vw;
+	color: #0d6efd;
+	margin: 72px 0;	
+}
+
+.wrapper__sign-up-form{
+	/* margin: 24px 0; */
+	margin: 24px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+  gap: 16px;
+	padding: 32px;
+	max-width: 600px;
+	box-shadow:rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+	border-radius: 25px;
+	min-height: 100px;
+	max-height: 120px;
+
+}
+
+.wrapper__control-forms {
+	display: flex;
+	flex-direction: row;
+	gap: 48px;
+}
+
+.wrapper__title {
+	text-align: center;
+}
+
+.wrapper__li-imgs{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	
+}
+
+.container__li-imgs{
+	max-width: 500px;
+	margin: 32px auto;
+	text-align: center;
+}
+
+.wrapper__img{
+	width: 100%;
+}
