@@ -1,11 +1,12 @@
 import pandas
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
+
 from flask import Flask, send_from_directory, jsonify, request, make_response
 import os
 
 
 app = Flask(__name__, static_folder="frontend/  ", static_url_path="")
-CORS(app)
+CORS(app, supports_credentials=True)
 
 
 @app.route("/", defaults={"path": ""})
@@ -18,13 +19,25 @@ def index(path):
 
 
 @app.route('/api/get_data', methods=['GET'])
+@cross_origin(supports_credentials=True)
 def get_data():
     print("API recieved")
     df = pandas.read_csv('final_perfume_data_with_prices.csv',
                          encoding='utf8', encoding_errors="ignore")
     records = df.to_json(orient='records')
-
     return jsonify(records)
+
+
+@app.errorhandler(400)
+def bad_request(error):
+    app.logger.error(f"Bad request: {error}")
+    return jsonify({'error': 'Bad request'}), 400
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    app.logger.error(f"Server error: {error}")
+    return jsonify({'error': 'Internal server error'}), 500
 
 
 if __name__ == "__main__":

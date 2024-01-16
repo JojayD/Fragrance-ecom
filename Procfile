@@ -1,1 +1,1 @@
-web: npm run build && python app.py & node server.cjs
+web: node server.cjs
