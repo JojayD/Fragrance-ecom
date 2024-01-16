@@ -1,13 +1,13 @@
 import pandas
 from flask_cors import CORS
 from flask import Flask, send_from_directory, jsonify, request, make_response
+import os
 
 
 app = Flask(__name__, static_folder="frontend/  ", static_url_path="")
 CORS(app)
 
 
-import os
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def index(path):
