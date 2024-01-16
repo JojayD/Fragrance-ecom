@@ -35,7 +35,7 @@ export default function App() {
 
 	async function fetchData() {
 		try {
-			const response = await axios.get("http://localhost:5001/api/get_data");
+			const response = await axios.get("/api/get_data");
 			console.log("Data fetched from API:", response.data);
 			setListOfFragrances(JSON.parse(response.data));
 			localStorage.setItem("fragranceData", JSON.stringify(response.data));
