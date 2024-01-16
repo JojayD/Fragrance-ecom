@@ -34,6 +34,7 @@ export default function App() {
 	}, [listOfFragrances]);
 
 	async function fetchData() {
+		
 		try {
 			const response = await axios.get("/api/get_data");
 			console.log("Data fetched from API:", response.data);

@@ -45,7 +45,6 @@ export default function Recommender({ listOfFragrances, data }: Props) {
 								data={fragrance}
 								showDescription={false}
 							/>
-	 
 					);
 				}
 			}

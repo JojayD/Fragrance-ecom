@@ -81,6 +81,7 @@ const Search: React.FC<SearchProps> = ({
 	}
 
 	function filteringSearch() {
+		console.log("filteringSearch button was clicked");
 		const filteredFragrances = listOfFragrances.filter((fragrance) => {
 			const loweredInputValue = fragranceQuery ? fragranceQuery.toLowerCase() : "";
 			switch (filterNameButton) {
