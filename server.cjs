@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.use(
 	"/api",
 	createProxyMiddleware({
-		target: "http://localhost:5001", // URL of your Flask backend
+		target: "https://guarded-taiga-31175-3b9300d9a8ba.herokuapp.com/api/get_data	", // URL of your Flask backend
 		changeOrigin: true,
 	})
 );
