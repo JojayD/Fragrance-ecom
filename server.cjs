@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.use(
 	"/api",
 	createProxyMiddleware({
-		target: "http://127.0.0.1:5001", // URL of your Flask backend
+		target: "http://localhost:5001", // URL of your Flask backend
 		changeOrigin: true,
 	})
 );
