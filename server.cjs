@@ -2,10 +2,13 @@ const express = require("express");
 const path = require("path");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const { log } = require("console");
+const  http  = require("http");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const url = " https://guarded-taiga-31175-3b9300d9a8ba.herokuapp.com/";
+let size = http.maxHeaderSize;
+console.log(size);
 const backendUrl =
 	process.env.NODE_ENV === "production"
 		? url

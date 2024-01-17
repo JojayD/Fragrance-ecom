@@ -39,7 +39,7 @@
 				const response = await axios.get("/api/get_data");
 				console.log("Data fetched from API:", response.data);
 				setListOfFragrances(JSON.parse(response.data));
-				localStorage.setItem("fragranceData", JSON.stringify(response.data));
+				// localStorage.setItem("fragranceData", JSON.stringify(response.data));
 			} catch (error) {
 				console.error("Error fetching data:", error);
 			}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import fragance_panel from "/frontend/src/assets/frag_panel.svg";
+import fragance_panel from "/frontend/src/assets/frag_panel_comp.png";
 import Carousel from "react-bootstrap/Carousel";
 import "/frontend/src/Styles/LandingPage.css";
 import Header from "./Header";

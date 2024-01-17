@@ -1,4 +1,4 @@
-import fragrance_img from "/frontend/src/assets/fragrance-img.png";
+import fragrance_img from "/frontend/src/assets/fragrance-img.jpeg";
 import { Button, Form } from "react-bootstrap";
 import styles from "/frontend/src/Styles/SignUpForm.module.css";
 import { Link } from "react-router-dom";
