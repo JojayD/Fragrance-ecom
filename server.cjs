@@ -6,13 +6,13 @@ const { log } = require("console");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const url = " https://guarded-taiga-31175-3b9300d9a8ba.herokuapp.com/";
-// const urlLocal = "http://127.0.0.1:5001";
+const urlLocal = "http://127.0.0.1:5001";
 app.use(express.static(path.join(__dirname, "dist")));
 
 app.use(
 	"/api",
 	createProxyMiddleware({
-		target: url,
+		target: urlLocal,
 		changeOrigin: true,
 		onError: (err, req, res) => {
 			console.error(`Error in proxy middleware: ${err.message}`);
