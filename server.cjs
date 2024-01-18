@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 
 const backendUrl =
 	process.env.NODE_ENV === "production"
-		? "https://fragrance-ecom-84a3a68169b6.herokuapp.com/"
+		? "https://mysterious-ridge-63358-b448a426543c.herokuapp.com"
 		: "http://127.0.0.1:5001";
 
 // app.use(cors());

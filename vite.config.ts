@@ -9,7 +9,7 @@ export default defineConfig({
 			"/api":
 				process.env.NODE_ENV === "development"
 					? "http://localhost:3000" // Development backend URL
-					: "https://fragrance-ecom-84a3a68169b6.herokuapp.com/", // Production backend URL
+					: "https://mysterious-ridge-63358-b448a426543c.herokuapp.com", // Production backend URL
 		},
 	},
 });
