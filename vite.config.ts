@@ -1,15 +1,15 @@
-  import { defineConfig } from "vite";
-  import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
 
-  // https://vitejs.dev/config/
-  export default defineConfig({
-    plugins: [react()],
-    server:
-      process.env.NODE_ENV === "development"
-        ? {
-            proxy: {
-              "/api": "http://localhost:3000",
-            },
-          }
-        : {},
-  });
+// https://vitejs.dev/config/
+export default defineConfig({
+	plugins: [react()],
+	server: {
+		proxy: {
+			"/api":
+				process.env.NODE_ENV === "development"
+					? "http://localhost:3000" // Development backend URL
+					: "https://guarded-taiga-31175-3b9300d9a8ba.herokuapp.com", // Production backend URL
+		},
+	},
+});

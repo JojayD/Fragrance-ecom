@@ -1,4 +1,4 @@
-const cors = require("cors");
+// const cors = require("cors");
 const express = require("express");
 const path = require("path");
 const { createProxyMiddleware } = require("http-proxy-middleware");
@@ -11,7 +11,7 @@ const backendUrl =
 		? "https://guarded-taiga-31175-3b9300d9a8ba.herokuapp.com"
 		: "http://127.0.0.1:5001";
 
-app.use(cors());
+// app.use(cors());
 app.use(express.static(path.join(__dirname, "dist")));
 
 app.use(
