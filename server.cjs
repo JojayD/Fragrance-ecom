@@ -4,7 +4,7 @@ const path = require("path");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const backendUrl =
 	process.env.NODE_ENV === "production"
