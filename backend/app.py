@@ -19,7 +19,7 @@ def index(path):
         return send_from_directory(app.static_folder, "index.html")
 
 
-@app.route('/api/get_data', methods=['GET'])
+@app.route("/api/get_data", methods=['GET'])
 @cross_origin(supports_credentials=True)
 def get_data():
     print("API recieved")
